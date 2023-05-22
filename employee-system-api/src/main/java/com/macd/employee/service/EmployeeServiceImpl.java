@@ -36,16 +36,19 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     AggregationResults<MaxFieldEntity> results =
         mongoOperations.aggregate(aggregation, EmployeeEntity.class, MaxFieldEntity.class);
-    Long id = results.getUniqueMappedResult().getMaxField();
-    empId = id == null ? 0 : id;
+    Long id =
+        results.getMappedResults().size() == 0
+            ? null
+            : results.getUniqueMappedResult().getMaxField();
+    empId = id == null ? 1L : id;
   }
 
   @Override
   public Employee createEmployee(Employee employee) {
     EmployeeEntity employeeEntity = new EmployeeEntity();
 
-    employeeEntity.setEmpId(empId + 1L);
     BeanUtils.copyProperties(employee, employeeEntity);
+    employeeEntity.setEmpId(empId++);
     employeeRepository.save(employeeEntity);
     return employee;
   }
@@ -57,7 +60,7 @@ public class EmployeeServiceImpl implements EmployeeService {
         .map(
             emp ->
                 new Employee(
-                    emp.getEmpId(), emp.getFirstName(), emp.getLastName(), emp.getLastName()))
+                    emp.getEmpId(), emp.getFirstName(), emp.getLastName(), emp.getEmailId()))
         .collect(Collectors.toList());
   }
 }
