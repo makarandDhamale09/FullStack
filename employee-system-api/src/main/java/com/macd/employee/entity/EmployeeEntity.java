@@ -12,6 +12,17 @@ public class EmployeeEntity {
   private String lastName;
   private String emailId;
 
+  public EmployeeEntity() {
+  }
+
+  public EmployeeEntity(String id, Long empId, String firstName, String lastName, String emailId) {
+    Id = id;
+    this.empId = empId;
+    this.firstName = firstName;
+    this.lastName = lastName;
+    this.emailId = emailId;
+  }
+
   public String getId() {
     return Id;
   }
