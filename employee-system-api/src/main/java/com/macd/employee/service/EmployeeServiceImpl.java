@@ -9,10 +9,15 @@ import com.macd.employee.model.Employee;
 import com.macd.employee.repository.EmployeeRepository;
 import jakarta.annotation.PostConstruct;
 import java.util.List;
+import java.util.Optional;
+import java.util.concurrent.atomic.AtomicLong;
 import java.util.stream.Collectors;
 import org.springframework.beans.BeanUtils;
 import org.springframework.data.mongodb.core.MongoOperations;
+import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.aggregation.*;
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -20,13 +25,17 @@ public class EmployeeServiceImpl implements EmployeeService {
 
   private final EmployeeRepository employeeRepository;
   private final MongoOperations mongoOperations;
+  private final MongoTemplate mongoTemplate;
 
-  private Long empId;
+  private AtomicLong empId = new AtomicLong();
 
   public EmployeeServiceImpl(
-      EmployeeRepository employeeRepository, MongoOperations mongoOperations) {
+      EmployeeRepository employeeRepository,
+      MongoOperations mongoOperations,
+      MongoTemplate mongoTemplate) {
     this.employeeRepository = employeeRepository;
     this.mongoOperations = mongoOperations;
+    this.mongoTemplate = mongoTemplate;
   }
 
   @PostConstruct
@@ -36,11 +45,13 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     AggregationResults<MaxFieldEntity> results =
         mongoOperations.aggregate(aggregation, EmployeeEntity.class, MaxFieldEntity.class);
-    Long id =
-        results.getMappedResults().size() == 0
-            ? null
-            : results.getUniqueMappedResult().getMaxField();
-    empId = id == null ? 1L : id;
+    Optional<Long> optionalId =
+        Optional.ofNullable(
+            results.getMappedResults().isEmpty()
+                ? null
+                : results.getUniqueMappedResult().getMaxField());
+    Long eId = optionalId.map(id -> id + 1).orElse(1L);
+    empId.set(eId);
   }
 
   @Override
@@ -48,7 +59,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     EmployeeEntity employeeEntity = new EmployeeEntity();
 
     BeanUtils.copyProperties(employee, employeeEntity);
-    employeeEntity.setEmpId(empId++);
+    employeeEntity.setEmpId(empId.incrementAndGet());
     employeeRepository.save(employeeEntity);
     return employee;
   }
@@ -62,5 +73,16 @@ public class EmployeeServiceImpl implements EmployeeService {
                 new Employee(
                     emp.getEmpId(), emp.getFirstName(), emp.getLastName(), emp.getEmailId()))
         .collect(Collectors.toList());
+  }
+
+  @Override
+  public boolean deleteEmployee(Long id) {
+    boolean deleteFlag = false;
+    Query query = new Query();
+    query.addCriteria(Criteria.where("empId").is(id));
+    List<EmployeeEntity> employees = mongoTemplate.find(query, EmployeeEntity.class);
+    deleteFlag = !employees.isEmpty();
+    employees.forEach(employeeRepository::delete);
+    return deleteFlag;
   }
 }

@@ -5,22 +5,33 @@ import Employee from "./Employee";
 
 export default function EmployeeList() {
   const navigate = useNavigate();
-  const [employees, setemployee] = useState(null);
-  const [loading, setloading] = useState(true);
+  const [employees, setEmployees] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchData = async () => {
-      setloading(true);
+      setLoading(true);
       try {
         const response = await EmployeeService.getEmployees();
-        setemployee(response.data);
+        setEmployees(response.data);
       } catch (error) {
         console.log(error);
       }
-      setloading(false);
+      setLoading(false);
     };
     fetchData();
   }, []);
+
+  const deleteEmployee = (e, id) => {
+    e.preventDefault();
+    EmployeeService.deleteEmployee(id).then((res) => {
+      if (employees) {
+        setEmployees((prevElement) => {
+          return prevElement.filter((employee) => employee.empId !== id);
+        });
+      }
+    });
+  };
 
   return (
     <div className="container mx-6 my-6">
@@ -56,7 +67,11 @@ export default function EmployeeList() {
           {!loading && (
             <tbody className="bg-white">
               {employees.map((employee) => (
-                <Employee employee={employee} key={employee.empId} />
+                <Employee
+                  employee={employee}
+                  deleteEmployee={deleteEmployee}
+                  key={employee.empId}
+                />
               ))}
             </tbody>
           )}

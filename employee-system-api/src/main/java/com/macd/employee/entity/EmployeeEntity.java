@@ -6,7 +6,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Document(collection = "employees")
 public class EmployeeEntity {
 
-  @Id private String Id;
+  @Id private String id;
   private Long empId;
   private String firstName;
   private String lastName;
@@ -16,7 +16,7 @@ public class EmployeeEntity {
   }
 
   public EmployeeEntity(String id, Long empId, String firstName, String lastName, String emailId) {
-    Id = id;
+    this.id = id;
     this.empId = empId;
     this.firstName = firstName;
     this.lastName = lastName;
@@ -24,11 +24,11 @@ public class EmployeeEntity {
   }
 
   public String getId() {
-    return Id;
+    return id;
   }
 
   public void setId(String id) {
-    Id = id;
+    this.id = id;
   }
 
   public Long getEmpId() {
@@ -61,5 +61,16 @@ public class EmployeeEntity {
 
   public void setEmailId(String emailId) {
     this.emailId = emailId;
+  }
+
+  @Override
+  public String toString() {
+    return "EmployeeEntity{" +
+            "id='" + id + '\'' +
+            ", empId=" + empId +
+            ", firstName='" + firstName + '\'' +
+            ", lastName='" + lastName + '\'' +
+            ", emailId='" + emailId + '\'' +
+            '}';
   }
 }
