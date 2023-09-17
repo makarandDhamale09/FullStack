@@ -7,8 +7,10 @@ import com.macd.employee.entity.EmployeeEntity;
 import com.macd.employee.entity.MaxFieldEntity;
 import com.macd.employee.model.Employee;
 import com.macd.employee.repository.EmployeeRepository;
+import com.mongodb.client.result.UpdateResult;
 import jakarta.annotation.PostConstruct;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.concurrent.atomic.AtomicLong;
 import java.util.stream.Collectors;
@@ -18,6 +20,7 @@ import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.aggregation.*;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -59,7 +62,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     EmployeeEntity employeeEntity = new EmployeeEntity();
 
     BeanUtils.copyProperties(employee, employeeEntity);
-    employeeEntity.setEmpId(empId.incrementAndGet());
+    employeeEntity.setEmpId(empId.getAndIncrement());
     employeeRepository.save(employeeEntity);
     return employee;
   }
@@ -80,9 +83,40 @@ public class EmployeeServiceImpl implements EmployeeService {
     boolean deleteFlag = false;
     Query query = new Query();
     query.addCriteria(Criteria.where("empId").is(id));
-    List<EmployeeEntity> employees = mongoTemplate.find(query, EmployeeEntity.class);
-    deleteFlag = !employees.isEmpty();
-    employees.forEach(employeeRepository::delete);
+    EmployeeEntity employee = mongoTemplate.findOne(query, EmployeeEntity.class);
+    if (!Objects.isNull(employee)) {
+      employeeRepository.delete(employee);
+      deleteFlag = true;
+    }
     return deleteFlag;
+  }
+
+  @Override
+  public Employee getEmployeeById(Long id) {
+    Query query = new Query();
+    query.addCriteria(Criteria.where("empId").is(id));
+    EmployeeEntity employeeEntity = mongoTemplate.findOne(query, EmployeeEntity.class);
+    if(!Objects.isNull(employeeEntity)){
+      return new Employee(
+              employeeEntity.getEmpId(),
+              employeeEntity.getFirstName(),
+              employeeEntity.getLastName(),
+              employeeEntity.getEmailId());
+    }else{
+     return new Employee(id,"","","");
+    }
+  }
+
+  @Override
+  public boolean updateEmployee(Employee employee) {
+    Query query = new Query();
+    query.addCriteria(Criteria.where("empId").is(employee.empId()));
+    Update update =
+        new Update()
+            .set("firstName", employee.firstName())
+            .set("lastName", employee.lastName())
+            .set("emailId", employee.emailId());
+    UpdateResult updateResult = mongoTemplate.updateFirst(query, update, EmployeeEntity.class);
+    return updateResult.wasAcknowledged();
   }
 }
