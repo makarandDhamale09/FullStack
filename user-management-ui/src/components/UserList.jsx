@@ -8,6 +8,7 @@ const UserList = ({ user }) => {
   const [users, setUsers] = useState(null);
   const [loading, setLoading] = useState(true);
   const [userId, setUserId] = useState(null);
+  const [responseUser, setResponseUser] = useState(null);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -27,7 +28,7 @@ const UserList = ({ user }) => {
       setLoading(false);
     };
     fetchData();
-  }, [user]);
+  }, [user, responseUser]);
 
   const deleteUser = (e, id) => {
     e.preventDefault();
@@ -86,7 +87,11 @@ const UserList = ({ user }) => {
           </table>
         </div>
       </div>
-      <EditUser userId={userId} setUserId={setUserId} />
+      <EditUser
+        userId={userId}
+        setUserId={setUserId}
+        setResponseUser={setResponseUser}
+      />
     </>
   );
 };
