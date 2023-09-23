@@ -9,4 +9,14 @@ router.get("/", (req, res) => {
     .catch((err) => console.log(err));
 });
 
-model.exports = router;
+router.get("/hello", (req, res) => {
+  res.send("Hello World!!!");
+});
+
+router.post("/", (req, res) => {
+  Employee.create(req.body)
+    .then((data) => res.send(data))
+    .catch((err) => console.log(err));
+});
+
+module.exports = router;
