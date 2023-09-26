@@ -1,4 +1,3 @@
-import { Children } from "react";
 import "@styles/global.css";
 import Nav from "@components/Nav";
 
