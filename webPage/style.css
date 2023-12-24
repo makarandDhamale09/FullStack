@@ -86,9 +86,16 @@ h4 {
   display: inline-block;
 }
 
-.icon {
+.icon-header {
   height: 15px;
   display: inline-block;
+  color: rgba(238, 14, 44, 0.904);
+}
+
+.icon {
+  height: 18px;
+  display: inline-block;
+  color: rgba(238, 14, 44, 0.904);
 }
 
 .mailId:link,
@@ -140,12 +147,17 @@ h4 {
   margin-top: 56px;
 }
 
+.company-group {
+  margin-top: 32px;
+}
+
 .company {
   margin-top: 20px;
 }
 
-.company-name {
+.duration {
   display: block;
+  margin-left: 24px;
 }
 
 .employment p {
@@ -170,4 +182,9 @@ h4 {
 
 .responsibility-item {
   margin-top: 10px;
+}
+
+/* EDUCATION */
+.education {
+  margin-top: 56px;
 }
