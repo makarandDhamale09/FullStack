@@ -1,6 +1,6 @@
 @page {
   size: A4;
-  margin: 12mm;
+  margin: 0;
 }
 
 html,
@@ -15,11 +15,11 @@ body {
 .paper {
   width: 210mm;
   min-height: 297mm;
-  margin: 12mm auto;
+  margin: 10mm auto;
   background: #fff;
   box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
   box-sizing: border-box;
-  padding: 16mm;
+  padding: 14mm;
 }
 
 .header {
@@ -27,17 +27,11 @@ body {
   justify-content: space-between;
   align-items: flex-start;
   padding-bottom: 8px;
-  margin-bottom: 12px;
+  margin-bottom: 5px;
 }
 
 .header-left {
   flex: 1;
-}
-
-.header-right {
-  display: flex;
-  gap: 12px;
-  align-items: flex-start;
 }
 
 .name {
@@ -51,19 +45,22 @@ body {
   margin-top: 6px;
 }
 
-.contact {
-  font-size: 12px;
-  color: #333;
-  text-align: right;
+.contact-bar {
+  display: flex;
+  flex-direction: row;
+  gap: 24px;
+  margin-top: 20px;
+  margin-bottom: 12px;
 }
 
-.contact div {
-  margin-bottom: 6px;
+.contact-item {
+  font-size: 12px;
+  color: #333;
 }
 
 .profile-img {
-  width: 100px;
-  height: 100px;
+  width: 120px;
+  height: 120px;
   border-radius: 8px;
   object-fit: cover;
   border: 1px solid #e6e6e6;
