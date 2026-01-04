@@ -26,8 +26,8 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  padding-bottom: 8px;
-  margin-bottom: 5px;
+  /* padding-bottom: 8px;
+  margin-bottom: 5px; */
 }
 
 .header-left {
@@ -102,7 +102,7 @@ ul {
 }
 
 li {
-  margin-bottom: 4px;
+  margin-bottom: 2px;
 }
 
 .muted {
@@ -146,12 +146,6 @@ li {
 
 .inline-item {
   flex: none;
-}
-
-.inline-item:first-child {
-  grid-column: 1 / -1;
-  padding-bottom: 8px;
-  margin-bottom: 8px;
 }
 
 /* Responsive Design */
