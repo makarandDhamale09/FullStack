@@ -19,20 +19,20 @@ body {
   background: #fff;
   box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
   box-sizing: border-box;
-  padding: 14mm;
+  padding: 10mm 12mm;
 }
 
 .header {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  margin-bottom: 8px;
+  margin-bottom: 6px;
   gap: 8px;
 
   /* ADD THESE LINES */
   border: 1px solid #e0e0e0; /* A soft, neutral light gray */
   border-radius: 4px; /* Slightly rounded corners look more modern */
-  padding: 12px; /* IMPORTANT: Adds space between the text and the border */
+  padding: 8px 10px; /* IMPORTANT: Adds space between the text and the border */
   background-color: #fafafa; /* Optional: very light fill to make the section pop */
 }
 
@@ -48,18 +48,18 @@ body {
 }
 
 .name {
-  font-size: 22px;
+  font-size: 20px;
   font-weight: 700;
-  margin-bottom: 2px;
+  margin-bottom: 1px;
   text-align: center;
   color: #0859a9;
 }
 
 .role {
-  font-size: 14px;
+  font-size: 13px;
   color: #555;
-  margin-top: 2px;
-  margin-bottom: 6px;
+  margin-top: 1px;
+  margin-bottom: 4px;
   text-align: center;
 }
 
@@ -68,7 +68,7 @@ body {
   grid-template-columns: auto auto;
   justify-content: space-between;
   gap: 2px 0;
-  margin-top: 8px;
+  margin-top: 4px;
   margin-bottom: 0;
 }
 
@@ -78,8 +78,8 @@ body {
 }
 
 .profile-img {
-  width: 95px;
-  height: 95px;
+  width: 85px;
+  height: 85px;
   border-radius: 6px;
   object-fit: cover;
   border: 1px solid #e6e6e6;
@@ -92,15 +92,15 @@ a {
 }
 
 h3 {
-  margin: 12px 0 10px 0;
-  font-size: 13px;
+  margin: 10px 0 8px 0;
+  font-size: 12px;
   font-weight: 600;
   border-bottom: 1px solid rgba(200, 200, 200, 0.4);
   color: #0859a9;
 }
 
 section {
-  margin-bottom: 20px;
+  margin-bottom: 16px;
   padding-bottom: 0;
   border-bottom: none;
 }
@@ -121,7 +121,7 @@ div {
 }
 
 ul {
-  margin: 6px 0 0 18px;
+  margin: 8px 0 0 18px;
   padding: 0;
 }
 
@@ -140,7 +140,7 @@ li {
 }
 
 .job-entry {
-  margin-bottom: 12px;
+  margin-bottom: 10px;
 }
 
 .job-header {
@@ -212,13 +212,13 @@ li {
   }
   @page {
     size: A4;
-    margin: 12mm;
+    margin: 10mm;
   }
   .paper {
     width: auto;
     min-height: auto;
     margin: 0;
-    padding: 12mm;
+    padding: 8mm 10mm;
     box-shadow: none;
     page-break-after: avoid;
   }
