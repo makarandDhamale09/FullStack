@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cover Letter - Makarand Dhamale</title>
+    <style>
+      body {
+        font-family: "Arial", sans-serif;
+        line-height: 1.4;
+        color: #333;
+        max-width: 750px;
+        margin: 20px auto;
+        padding: 10px;
+      }
+      header {
+        border-bottom: 2px solid #2c3e50;
+        padding-bottom: 10px;
+        margin-bottom: 15px;
+        text-align: center;
+      }
+      h1 {
+        margin: 0;
+        color: #2c3e50;
+        font-size: 24px;
+        text-transform: uppercase;
+      }
+      .contact-info {
+        font-size: 0.85em;
+        color: #555;
+        margin-top: 5px;
+      }
+      .date {
+        margin-bottom: 10px;
+        font-weight: bold;
+      }
+      .recipient {
+        margin-bottom: 15px;
+      }
+      p {
+        margin-bottom: 10px;
+        font-size: 0.95em;
+      }
+      ul {
+        margin-bottom: 10px;
+        padding-left: 20px;
+        font-size: 0.95em;
+      }
+      li {
+        margin-bottom: 4px;
+      }
+      .signature {
+        margin-top: 20px;
+      }
+      a {
+        color: #3498db;
+        text-decoration: none;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>Makarand Dhamale</h1>
+      <div class="contact-info">
+        makarand.dhamale09@gmail.com | +91 8793264880 | Pune, India |
+        <a href="https://linkedin.com/in/makarand-dhamale">LinkedIn</a>
+      </div>
+    </header>
+
+    <div class="content">
+      <div class="date" id="dateField"></div>
+
+      <div class="recipient">
+        <strong>To: Zalando SE Hiring Team</strong>
+      </div>
+
+      <p>
+        <strong>Subject: Senior Software Engineer - Backend</strong>
+      </p>
+
+      <p>Dear Hiring Committee,</p>
+
+      <p>
+        I am writing to apply for the Senior Backend Engineer position. With
+        over 11 years of experience in architecting distributed systems and
+        migrating monolithic architectures to cloud-native environments, I am
+        eager to contribute to Zalando’s high-performance software ecosystem.
+      </p>
+
+      <p>
+        Currently, at Roche, I designed an Apache Flink streaming application
+        from scratch to process real-time health data for 60,000 users. This
+        involved transitioning from microservices to a stream-processing model
+        to handle massive data volumes efficiently.
+      </p>
+
+      <p>Key qualifications I bring to Zalando:</p>
+      <ul>
+        <li>
+          <strong>Java & Scalability:</strong> Expert in Java 17/21 and Spring
+          Boot, having designed microservices for a global banking portfolio
+          across 72 countries.
+        </li>
+        <li>
+          <strong>Cloud & DevOps:</strong> Extensive experience deploying
+          secure, scalable APIs to AWS EKS and managing Kafka-based systems.
+        </li>
+        <li>
+          <strong>Performance:</strong> Proven ability to optimize SQL queries
+          and system performance by 20%.
+        </li>
+      </ul>
+
+      <p>
+        Having previously worked on-site in Germany and holding A1 German
+        proficiency, I am excited about returning to the German tech ecosystem.
+        My experience in delivering low-latency, resilient systems makes me a
+        strong fit for your team.
+      </p>
+
+      <p>
+        Thank you for your consideration. I look forward to discussing how my
+        background can support Zalando’s innovation.
+      </p>
+
+      <div class="signature">
+        Sincerely,<br />
+        <strong>Makarand Dhamale</strong>
+      </div>
+    </div>
+
+    <script>
+      // Set today's date dynamically
+      const dateField = document.getElementById("dateField");
+      const today = new Date();
+      const options = { year: "numeric", month: "long", day: "numeric" };
+      dateField.textContent = today.toLocaleDateString("en-US", options);
+    </script>
+  </body>
+</html>
