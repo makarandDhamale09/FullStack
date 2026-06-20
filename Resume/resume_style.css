@@ -240,8 +240,11 @@ li {
     flex-direction: row !important;
   }
   section {
-    page-break-inside: avoid;
     margin-bottom: 8px;
+  }
+  .job-entry {
+    page-break-inside: avoid;
+    margin-bottom: 12px;
   }
   .inline-row {
     page-break-inside: avoid;
@@ -251,5 +254,10 @@ li {
   }
   .profile-img {
     display: block;
+  }
+
+  /* Ensure skills and additional info stay together */
+  h3 {
+    page-break-after: avoid;
   }
 }
